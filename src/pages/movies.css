@@ -1,0 +1,99 @@
+.MovieImg{
+    height:200px;
+    width:200px;
+    border-radius: 5px;
+   
+}
+/* .MovieImg:hover{
+    height:230px;
+    width:230px;
+} */
+h2{ 
+    margin-bottom: 2rem;
+   
+}
+h2:hover{
+    color:red;
+    font-weight: bold;
+}
+.GridBox{
+    /* padding-bottom: 20rem; */
+    /* background: linear-gradient(to left,#320000,#550808); */
+}
+.GridBox:hover{
+    /* background: linear-gradient(to bottom,#3b0404,#630909);
+    border-radius: 10px; */
+}
+.TodayThisWeek{
+    font-size: 15px;
+    padding: 0.7rem;
+    font-family: monospace;
+    font-weight: 500;
+    border:none;
+    background:transparent;
+
+}
+.TodayThisWeek:hover{
+    font-size: 17px;
+    
+}
+.TodayThisWeek:focus,.TodayThisWeek:enabled{
+    border:none;
+    outline: none;
+    border-radius: 0;
+}
+
+.TimeWindow{
+    border:1.5px solid rgb(69, 7, 7);
+}
+
+.TimeWindow:hover{
+    border:2px solid rgb(0, 0, 0);
+}
+.MovieTitle{
+    background: rgba(0, 0, 0, 0.9);
+    padding: 0.2rem;
+    transform: scale(1);
+    border-radius: 5px;
+}
+.MovieTitle:hover{
+    opacity: 0.7;
+    transform: scale(1.08);
+    transition: transform 0.3s ease-in-out;
+}
+h4 {
+    margin: 0;
+}
+
+.MovieDetails {
+    display: none;
+    position: absolute;
+    padding: 0.5rem;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 33%;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    font-weight: normal;
+    text-align: center;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+}
+.MovieTitle:hover .MovieDetails {
+    display: block;
+}
+.MovieTitle {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 0.2rem;
+    transform: scale(1);
+}
+.Rating{
+    height:5px;
+    width:100%;
+}
+.Skeleton{
+    align-content: space-between;
+    justify-content: space-between ;
+}

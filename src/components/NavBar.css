@@ -1,0 +1,29 @@
+
+.LinkNames{
+    color:red;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: monospace;
+}
+.LinkNames:hover{
+    color:red;
+    font-size: 19px;
+}
+.Netflix{
+    color:red;
+    font-size: 35px;
+    font-weight: bold;
+    letter-spacing: widest;
+    font-family: monospace;
+}
+.Netflix:hover{
+    font-size: 32px;
+}
+.LinkNames img{
+    margin-top: 0.5rem;
+    height:25px;
+    width:25px;}
+.LinkNames img:hover{
+    height:26px;
+    width:26px;
+}
