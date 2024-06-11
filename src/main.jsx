@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from './App.jsx';
 import './index.css';
+import DetailsPage from './pages/DetailsPage.jsx';
 import Home from './pages/home.jsx';
 import Movies from './pages/movies/movies.jsx';
 import Search from './pages/search/Search.jsx';
@@ -27,6 +28,10 @@ const router=createBrowserRouter([{
   {
     path:"/search",
     element:<Search/>,
+  },
+  {
+    path:"/:type/:id",
+    element:<DetailsPage/>,
   },
 ]
 }]);

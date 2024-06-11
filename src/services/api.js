@@ -9,3 +9,7 @@ export const fetchTrending = async(time_window='day')=>{
   const {data}= await axios.get(`${baseUrl}/trending/all/${time_window}?api_key=${apiKey}`);
    return data?.results;
 }
+export const fetchDetails = async(type,id)=>{
+  const res = await axios.get(`${baseUrl}/${type}/${id}?api_key=${apiKey}`);
+  return res?.data;
+}

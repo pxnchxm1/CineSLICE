@@ -4,10 +4,10 @@ import React from 'react';
 import '../pages/movies.css';
 import { imagePath } from '../services/api';
 
-function CardComponent({item}) {
+function CardComponent({item,type}) {
   
   return (
-    <Link  href="/" underline="none">
+    <Link  href={`${type}/${item?.id}`} underline="none">
       <Box className="MovieTitle">
       <Box className="MovieBox" component="section" >
         <img className="MovieImg"   src={`${imagePath}/${item?.poster_path}`}  alt={item?.title || item?.name}/>

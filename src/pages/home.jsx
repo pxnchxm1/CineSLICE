@@ -1,3 +1,4 @@
+
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -18,7 +19,7 @@ const Home = () => {
       setData(res)}).catch((err)=>{
       console.log(err,'err')
      })
-     .finally(()=>{setLoading(false)})
+     .finally(()=>{setLoading(false);})
   },[timeWindow])
   console.log(data);
   return (
@@ -38,7 +39,7 @@ const Home = () => {
       {/* {loading && <center><div>Loading...</div></center>} */}
     <Grid className='GridBox' container   gridTemplateColumns={{base:"repeat(2,1fr)",sm:"repeat(2,1fr)",md:"repeat(3,1fr)",lg:"repeat(5,1fr)"}} justifyContent="space-between" alignItems="center">
         {data && data?.map((item,i)=>{
-          return loading? (<Skeleton key={i}  sx={{ bgcolor: 'grey.900' }} className='Skeleton' variant="rectangular" width={200} height={200} />) :(<CardComponent key={item?.id} item={item}/>)
+          return loading? (<Skeleton key={i}  sx={{ bgcolor: 'grey.900' }} className='Skeleton' variant="rectangular" width={200} height={200} />) :(<CardComponent key={item?.id} item={item} type={item?.media_type}/>)
         })}
         </Grid>
     </Container></Box>
