@@ -11,8 +11,8 @@ import './movies.css';
 
 const Home = () => {
   const [data,setData]=useState([]);
-  const [timeWindow,setTimeWindow]=useState("day");
-  const[loading,setLoading]=useState(true);
+  const [timeWindow,setTimeWindow] = useState("day");
+  const[loading,setLoading] = useState(true);
 
   useEffect(()=>{
      fetchTrending(timeWindow).then((res)=>{
