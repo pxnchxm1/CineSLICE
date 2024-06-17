@@ -2,7 +2,7 @@ import { Box, Button, Chip, CircularProgress, Container, Typography } from '@mui
 import Stack from '@mui/material/Stack';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchDetails, imagePath, imagePathOriginal } from '../services/api';
+import { fetchCredits, fetchDetails, imagePath, imagePathOriginal } from '../services/api';
 import { ratingColor, ratingToPercentage } from '../utils/helper';
 import './detailspage.css';
 
@@ -12,14 +12,32 @@ function DetailsPage() {
     
     const [loading,setloading] = useState(true);
     const [details,setdetails] = useState({});
+    const [cast,setCast] = useState({});
 
     const title = (details?.title || details?.name);
     const releaseDate = type==="tv"? details?.first_air_date : details?.release_date;
     
 
+    // useEffect(()=>{
+    //     fetchDetails(type,id).then((res)=>{setdetails(res);}).catch((err)=>{console.log(err)}).finally(()=>{setloading(false);})
+    // },[type,id]);
     useEffect(()=>{
-        fetchDetails(type,id).then((res)=>{setdetails(res);}).catch((err)=>{console.log(err)}).finally(()=>{setloading(false);})
-    },[type,id]);
+      const fetchData =async()=>{
+         try {
+        const [detailsData,creditsData] =  await Promise.all([
+          fetchDetails(type,id),
+          fetchCredits(type,id),])
+
+          setdetails(detailsData);
+          setCast(creditsData?.cast?.slice(0,10));
+         } catch (error) {
+          console.log (error);
+         }finally{
+          setloading(false);
+         }
+      }
+      fetchData();
+    },[type,id])
 
   if(loading){
     return <Stack justifyContent={'center'}   direction="row" mt={20}>
@@ -74,18 +92,30 @@ function DetailsPage() {
                 <Typography as="span" style={{fontSize:12 ,color:"grey", fontFamily:"monospace"}}>{details?.overview} </Typography>
                 <Stack marginTop={1} gap={2} direction={'row'}>
             {details?.genres?.map((genre) => (
-                <Chip key={genre.id} label={genre.name} color="success" variant="outlined" />
+                <Chip  className="Chip" key={genre.id} label={genre.name} color="success" variant="outlined" />
             ))}
             </Stack>
             </Box>
-            
-
             </Stack>
-           
-            
-                
             </Container>
-      </Box></Box>
+           
+      </Box>
+      <Container maxWidth="container.xl" p={2}>
+  
+        <h2 style={{fontSize:20, fontFamily:'monospace',marginLeft:16}}>Cast</h2>
+         {cast?.length===0 && <Typography as="span" style={{fontSize:15 ,color:"grey", fontFamily:"monospace"}}>No cast </Typography>
+          }
+          <Stack direction={"row"} overflow={'scroll'}>
+        {cast && cast?.map((items)=>(
+          <Box key={items?.id} p={2}>
+            <img className="MovieImgone" src={`${imagePath}/${items?.profile_path}`} />
+
+          </Box>
+          ))}
+        </Stack>
+      </Container>
+      </Box>
+      
   )
 }
 

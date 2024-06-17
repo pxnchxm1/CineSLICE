@@ -2,15 +2,39 @@
     height:200px;
     width:200px;
     border-radius: 5px;
+    border: 1px solid  rgba(93, 92, 92, 0.479); 
+    background: rgba(93, 92, 92, 0.479);
     background-color: rgba(93, 92, 92, 0.479);
    
 }
-/* .MovieImg:hover{
-    height:230px;
-    width:230px;
-} */
+.MovieImg:hover{
+    height:201px;
+    width:201px;
+    opacity: 0.4;
+}
+.MovieImgone{
+    height:160px;
+    width:120px;
+    border-radius: 5px;
+    border: 1px solid  rgba(93, 92, 92, 0.479); 
+    background: rgba(93, 92, 92, 0.479);
+    background-color: rgba(93, 92, 92, 0.479);
+   
+}
+.MovieImgone:hover{
+    height:161px;
+    width:121px;
+    opacity: 0.4;
+}
+.Chip:hover{
+  color:rgba(0, 255, 0, 0.934);
+  height:31px;
+  border: 1px solid rgba(0, 255, 0, 0.934);
+
+}
+
 h2{ 
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
    
 }
 h2:hover{
