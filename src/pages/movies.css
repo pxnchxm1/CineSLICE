@@ -12,6 +12,11 @@
     width:201px;
     opacity: 0.4;
 }
+.Select:enabled, .Select:focus{
+    outline: none;
+    border:none;
+    
+}
 .Chip:hover{
   color:rgba(0, 255, 0, 0.934);
   height:31px;

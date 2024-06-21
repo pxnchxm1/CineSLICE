@@ -20,10 +20,6 @@ function DetailsPage() {
     const title = (details?.title || details?.name);
     const releaseDate = type==="tv"? details?.first_air_date : details?.release_date;
     
-
-    // useEffect(()=>{
-    //     fetchDetails(type,id).then((res)=>{setdetails(res);}).catch((err)=>{console.log(err)}).finally(()=>{setloading(false);})
-    // },[type,id]);
     useEffect(()=>{
       const fetchData =async()=>{
         try {
@@ -31,7 +27,7 @@ function DetailsPage() {
           fetchDetails(type,id),
           fetchCredits(type,id),
         fetchVideos(type,id)])
-
+          setloading(true);
           setdetails(detailsData);
           setCast(creditsData?.cast?.slice(0,10));
           const video = videoData?.results?.find((vid)=>vid?.type === 'Trailer');
