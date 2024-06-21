@@ -13,3 +13,4 @@ https://github.com/pxnchxm1/CineSLICE/assets/117977315/dbbd6fe3-1b62-499d-8756-1
 
 
 ![image](https://github.com/pxnchxm1/CineSLICE/assets/117977315/fd4b1db7-5506-403e-a6f4-c794b4743fb6)
+![image](https://github.com/pxnchxm1/CineSLICE/assets/117977315/8f29a20f-caa9-4238-a72b-f9a087dc341a)
