@@ -17,3 +17,11 @@ export const fetchCredits = async(type,id)=>{
   const res = await axios.get(`${baseUrl}/${type}/${id}/credits?api_key=${apiKey}`);
   return res?.data;
 }
+export const fetchVideos = async(type,id)=>{
+  const res = await axios.get(`${baseUrl}/${type}/${id}/videos?api_key=${apiKey}`);
+  return res?.data;
+}
+export const fetchMovie = async()=>{
+  const res = await axios.get(`${baseUrl}/discover/movie?api_key=${apiKey}`);
+  return res?.data;
+}

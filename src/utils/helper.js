@@ -1,3 +1,8 @@
+export const hrToMin=(min)=>{
+    const hr = Math.floor(min/60);
+    const m = Math.floor(min%60);
+    return `${hr}H ${m}M`;
+}
 export const ratingToPercentage=(rating)=>{
     return (rating*10)?.toFixed(0);
 }

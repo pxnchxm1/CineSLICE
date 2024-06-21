@@ -2,8 +2,9 @@ import { Box, Button, Chip, CircularProgress, Container, Typography } from '@mui
 import Stack from '@mui/material/Stack';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchCredits, fetchDetails, imagePath, imagePathOriginal } from '../services/api';
-import { ratingColor, ratingToPercentage } from '../utils/helper';
+import VideoComponent from '../components/VideoComponent';
+import { fetchCredits, fetchDetails, fetchVideos, imagePath, imagePathOriginal } from '../services/api';
+import { hrToMin, ratingColor, ratingToPercentage } from '../utils/helper';
 import './detailspage.css';
 
 function DetailsPage() {
@@ -13,6 +14,8 @@ function DetailsPage() {
     const [loading,setloading] = useState(true);
     const [details,setdetails] = useState({});
     const [cast,setCast] = useState({});
+    const [video,setVideo]=useState(null);
+    const [videos,setVideos]=useState({});
 
     const title = (details?.title || details?.name);
     const releaseDate = type==="tv"? details?.first_air_date : details?.release_date;
@@ -23,18 +26,24 @@ function DetailsPage() {
     // },[type,id]);
     useEffect(()=>{
       const fetchData =async()=>{
-         try {
-        const [detailsData,creditsData] =  await Promise.all([
+        try {
+        const [detailsData,creditsData,videoData] =  await Promise.all([
           fetchDetails(type,id),
-          fetchCredits(type,id),])
+          fetchCredits(type,id),
+        fetchVideos(type,id)])
 
           setdetails(detailsData);
           setCast(creditsData?.cast?.slice(0,10));
-         } catch (error) {
+          const video = videoData?.results?.find((vid)=>vid?.type === 'Trailer');
+          setVideo(video);
+          const videos = videoData?.results?.filter((video)=> video?.type !== 'Trailer').slice(0,10);
+          setVideos(videos);
+
+        } catch (error) {
           console.log (error);
-         }finally{
+        }finally{
           setloading(false);
-         }
+        }
       }
       fetchData();
     },[type,id])
@@ -64,9 +73,19 @@ function DetailsPage() {
               <Stack alignItems={"center"} direction={"row"}>
                   <img src="../src/assets/calendar.png" height={20}/>
                   <Typography as="span" style={{fontSize:15 ,color:"grey",marginLeft:10}}>{new Date(releaseDate).toLocaleDateString('en-US')}(US)  </Typography>
-
+                  {type==="movie" &&(
+                <>
+                 
+                <Stack alignItems={"center"} direction={"row"} marginLeft={2}>
+                  <img src="../src/assets/time.png" height={20}/>
+                  <Typography as="span" style={{fontSize:13 ,color:"grey",marginLeft:10}}>{hrToMin(details?.runtime)}</Typography>
               </Stack>
+                </>
+              )}
+              </Stack>
+              
               <Stack alignItems={'center'} direction={"row"} > 
+
                 <Box sx={{ position: 'relative', display: 'inline-flex',marginTop:2 }}>
                   <CircularProgress variant="determinate" thickness={3.9} value={100}  color="inherit" />
                   <CircularProgress variant="determinate" value={ratingToPercentage(details?.vote_average)} thickness={3.9}
@@ -89,7 +108,7 @@ function DetailsPage() {
               <Typography variant="caption" component="div" color="grey" fontWeight={'normal'} fontStyle={'italic'} fontSize={18} marginTop={1}fontFamily={'monospace'} >
               {details?.tagline} </Typography>
               <h4 style={{fontSize:20 ,color:"white.100"}}>Overview</h4>
-                <Typography as="span" style={{fontSize:12 ,color:"grey", fontFamily:"monospace"}}>{details?.overview} </Typography>
+                <Typography as="span" className="Overview" style={{fontSize:12 ,color:"grey", fontFamily:"monospace"}}>{details?.overview} </Typography>
                 <Stack marginTop={1} gap={2} direction={'row'}>
             {details?.genres?.map((genre) => (
                 <Chip  className="Chip" key={genre.id} label={genre.name} color="success" variant="outlined" />
@@ -100,15 +119,26 @@ function DetailsPage() {
             </Container>
            
       </Box>
-      <Container maxWidth="container.xl" p={2}>
+      <Container maxWidth="container.xl"  >
   
-        <h2 style={{fontSize:20, fontFamily:'monospace',marginLeft:16}}>Cast</h2>
+        <h2  style={{fontSize:20, fontFamily:'monospace',marginLeft:25,textTransform:"uppercase"}}>Cast</h2>
          {cast?.length===0 && <Typography as="span" style={{fontSize:15 ,color:"grey", fontFamily:"monospace"}}>No cast </Typography>
           }
-          <Stack direction={"row"} overflow={'scroll'}>
+          <Stack className='others' direction={"row"}>
         {cast && cast?.map((items)=>(
-          <Box key={items?.id} p={2}>
+          <Box key={items?.id} p={1}>
             <img className="MovieImgone" src={`${imagePath}/${items?.profile_path}`} />
+
+          </Box>
+          ))}
+        </Stack>
+        <h2  style={{fontSize:20, fontFamily:'monospace',marginLeft:25,textTransform:"uppercase"}}>Videos</h2>
+        <VideoComponent id={video?.key} marginTop={10}/>
+        <Stack  className='vids' direction={"row"} >
+        {videos && videos?.map((items)=>(
+          <Box key={items?.id}  >
+           <VideoComponent id={items?.key} small />
+           <Typography className='clamp-lines' fontSize={10} color={'grey'} textAlign={'center'} paddingLeft={3} paddingRight={3} >{items?.name}</Typography>
 
           </Box>
           ))}
