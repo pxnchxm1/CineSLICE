@@ -49,7 +49,6 @@ function DetailsPage() {
       <CircularProgress style={{justifyContent:"center" ,alignItems:"center",color:"red"}}/>
     </Stack>
   }
-  console.log(details);
   return (
     <Box>
         <Box style={{
@@ -62,7 +61,7 @@ function DetailsPage() {
             <img className="MovieImage" height={"400px"} style={{borderRadius:"sm"}} src={`${imagePath}/${details?.poster_path}`} />
             <Box className="MovieNameNYear">
               <Stack alignItems={"center"}  gap={2}  direction={"row"}>
-                <h3 style={{fontSize:22 ,color:"white.100"}}>{title}
+                <h3 style={{fontSize:22 ,color:"white.100",textTransform:"uppercase"}}>{title}
                 <Typography as="span" style={{fontSize:22 ,color:"grey",marginLeft:10}}>{new Date(releaseDate).getFullYear()} </Typography>
                 </h3>
               </Stack>

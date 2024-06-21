@@ -1,4 +1,4 @@
-import { Select } from '@mui/material';
+import { CircularProgress, Select } from '@mui/material';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
@@ -31,6 +31,11 @@ function Movies() {
     }
     fetchDatas();
   },[activepage,totalPages,sortby]);
+  if(loading){
+    return <Stack justifyContent={'center'}   direction="row" mt={20}>
+      <CircularProgress style={{justifyContent:"center" ,alignItems:"center",color:"red"}}/>
+    </Stack>
+  }
   return (
     <Container  sx={{ml:5}}>
       <Stack direction={'row'} gap={2} justifyItems={'center'} alignItems={'center'}>
@@ -40,11 +45,13 @@ function Movies() {
           
           value={sortby}
           label="Sort by"
-          onChange={(e)=>{setSortBy(e.target.value)}}
+          onChange={(e)=>{
+            setActivePage(1);
+            setSortBy(e.target.value)}}
         >
          
           <MenuItem value={'popularity.desc'}>Popular</MenuItem>
-          <MenuItem value={'vote_average.desc'}>Top Rated</MenuItem>
+          <MenuItem value={'vote_average.desc&vote_count.gte=1000'}>Top Rated</MenuItem>
         </Select>
 
       </Stack>

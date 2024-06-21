@@ -27,7 +27,11 @@ export const fetchMovie = async(page,sortby)=>{
   return res?.data;
 }
 
-export const fetchShows = async(page)=>{
-  const res = await axios.get(`${baseUrl}/discover/tv?api_key=${apiKey}&page=${page}`);
+export const fetchShows = async(page,sortby)=>{
+  const res = await axios.get(`${baseUrl}/discover/tv?api_key=${apiKey}&page=${page}&sort_by=${sortby}`);
+  return res?.data;
+}
+export const fetchSearch = async(page,query)=>{
+  const res = await axios.get(`${baseUrl}/search/multi?api_key=${apiKey}&page=${page}&query=${query}`);
   return res?.data;
 }

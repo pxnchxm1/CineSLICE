@@ -1,4 +1,5 @@
 
+import { CircularProgress } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -21,7 +22,11 @@ const Home = () => {
      })
      .finally(()=>{setLoading(false);})
   },[timeWindow])
-  console.log(data);
+  if(loading){
+    return <Stack justifyContent={'center'}   direction="row" mt={20}>
+      <CircularProgress style={{justifyContent:"center" ,alignItems:"center",color:"red"}}/>
+    </Stack>
+  }
   return (
     <Box component="section" sx={{p:4, mb:2}}>
     <Container container spacing={3} direction="row" justifycontent={"center"} >
