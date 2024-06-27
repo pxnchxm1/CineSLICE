@@ -1,0 +1,50 @@
+.authBox{
+    margin-top: 2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    margin-left: 22rem;
+    margin-right: 22rem;
+    border: 1px solid grey;
+    width:38%;
+}
+.authBox:hover{
+    opacity:0.8;
+}
+.link:hover{
+  color:red;
+}
+.ChangeAuthPage{
+    color:grey;
+    padding: 1rem;
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+}
+form{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+}
+.btn{
+    width:100px;
+    color: red;
+    opacity:0.6;
+    margin-bottom: 2rem;
+}
+.btn:hover{
+    border: 1px solid red;
+    color:red;
+    opacity:0.5;
+}
+.EmailPassword{
+    width: 300px;
+}

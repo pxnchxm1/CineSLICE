@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from './App.jsx';
+import { AuthProvider } from './context/authProvider.jsx';
 import './index.css';
 import DetailsPage from './pages/DetailsPage.jsx';
 import Home from './pages/home.jsx';
@@ -33,11 +34,14 @@ const router=createBrowserRouter([{
     path:"/:type/:id",
     element:<DetailsPage/>,
   },
+
 ]
 }]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <AuthProvider>
     <RouterProvider router={router}/>
-  </React.StrictMode>,
+    </AuthProvider>
+  </React.StrictMode>
 )
