@@ -82,7 +82,7 @@ function Navbar() {
               
               <MenuItem onClick={handleClose}>
                 <Avatar sx={{padding:"2px",height:"22px",width:"22px",marginRight:"10px"}} />  
-                <Link  sx={{color:"black", fontSize:15,fontWeight:"normal"}} href="/" underline="none"> Watchlist</Link>
+                <Link  sx={{color:"black", fontSize:15,fontWeight:"normal"}} href="/watchlist" underline="none"> Watchlist</Link>
         
               </MenuItem>
               <Divider />
@@ -102,7 +102,7 @@ function Navbar() {
           <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
           <Tooltip title="Account settings">
             <IconButton
-              onClick={handleClick}
+              onClick={handleClose}
               size="small"
               sx={{ ml: 2,backgroundColor:"black" ,border:"2px solid red"}}
               aria-controls={open ? 'account-menu' : undefined}

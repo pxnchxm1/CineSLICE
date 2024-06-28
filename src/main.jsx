@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from './App.jsx';
+import Protected from './components/routes/Protected.jsx';
 import { AuthProvider } from './context/authProvider.jsx';
 import './index.css';
 import DetailsPage from './pages/DetailsPage.jsx';
+import Watchlist from './pages/Watchlist.jsx';
 import Home from './pages/home.jsx';
 import Movies from './pages/movies/movies.jsx';
 import Search from './pages/search/Search.jsx';
@@ -34,6 +36,14 @@ const router=createBrowserRouter([{
     path:"/:type/:id",
     element:<DetailsPage/>,
   },
+  {
+    path:"/watchlist",
+    element:(
+      <Protected>
+        <Watchlist/>
+      </Protected>
+    )
+  }
 
 ]
 }]);

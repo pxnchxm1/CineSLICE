@@ -42,7 +42,19 @@ function DetailsPage() {
         }
       }
       fetchData();
-    },[type,id])
+    },[type,id]);
+
+    const handleWatchlistSave=async()=>{
+      const data ={
+        id : details?.id,
+        type: type,
+        tite : details?.title || details?.name,
+        poster_path : details?.poster_path,
+        vote_average: details?.vote_average,
+        overview : details?.overview
+      }
+      console.log(data);
+    }
 
   if(loading){
     return <Stack justifyContent={'center'}   direction="row" mt={20}>
@@ -96,7 +108,7 @@ function DetailsPage() {
                 <Button  variant="outlined" onClick={console.log("click")} color="success" style={{marginLeft:10,marginTop:10, display:"none"}}>
                  In Watchlist
                 </Button>
-                <Button variant="outlined" onClick={console.log("click")} color="error" style={{marginLeft:10,marginTop:10}}>
+                <Button variant="outlined" onClick={handleWatchlistSave} color="error" style={{marginLeft:10,marginTop:10}}>
  + Add to Watchlist 
 </Button>
               </Stack>
