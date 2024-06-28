@@ -1,22 +1,26 @@
 import { Box, Button, Chip, CircularProgress, Container, Typography } from '@mui/material';
+import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 import VideoComponent from '../components/VideoComponent';
+import { useAuth } from '../context/useAuth';
 import { fetchCredits, fetchDetails, fetchVideos, imagePath, imagePathOriginal } from '../services/api';
 import { hrToMin, ratingColor, ratingToPercentage } from '../utils/helper';
 import './detailspage.css';
 
 function DetailsPage() {
     const router = useParams();
+    const [showAlert, setShowAlert] = useState(false);
     const {type,id}=router;
-    
+    const {user} = useAuth();
     const [loading,setloading] = useState(true);
     const [details,setdetails] = useState({});
     const [cast,setCast] = useState({});
     const [video,setVideo]=useState(null);
     const [videos,setVideos]=useState({});
-
+    const [alertTimeout, setAlertTimeout] = useState(null);
     const title = (details?.title || details?.name);
     const releaseDate = type==="tv"? details?.first_air_date : details?.release_date;
     
@@ -45,15 +49,30 @@ function DetailsPage() {
     },[type,id]);
 
     const handleWatchlistSave=async()=>{
-      const data ={
-        id : details?.id,
-        type: type,
-        tite : details?.title || details?.name,
-        poster_path : details?.poster_path,
-        vote_average: details?.vote_average,
-        overview : details?.overview
+      if(!user){
+        setShowAlert(true);
+        if (alertTimeout) {
+          clearTimeout(alertTimeout);
       }
-      console.log(data);
+      const timeout = setTimeout(() => {
+          setShowAlert(false);
+      }, 600);
+      setAlertTimeout(timeout);
+        return; 
+        
+      }
+      if(user){
+        const data ={
+          id : details?.id,
+          type: type,
+          tite : details?.title || details?.name,
+          poster_path : details?.poster_path,
+          vote_average: details?.vote_average,
+          overview : details?.overview,
+          release_date : details?.release_date || details?.first_air_date,
+        }
+        console.log(data);
+      }
     }
 
   if(loading){
@@ -111,6 +130,11 @@ function DetailsPage() {
                 <Button variant="outlined" onClick={handleWatchlistSave} color="error" style={{marginLeft:10,marginTop:10}}>
  + Add to Watchlist 
 </Button>
+{showAlert && (
+    <Stack sx={{marginLeft:'2rem'}} spacing={2}>
+        <Alert severity="error">Please log in to save your item to watchlist!</Alert>
+    </Stack>
+)}
               </Stack>
               <Typography variant="caption" component="div" color="grey" fontWeight={'normal'} fontStyle={'italic'} fontSize={18} marginTop={1}fontFamily={'monospace'} >
               {details?.tagline} </Typography>
