@@ -3,16 +3,19 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import VideoComponent from '../components/VideoComponent';
 import { useAuth } from '../context/useAuth';
 import { fetchCredits, fetchDetails, fetchVideos, imagePath, imagePathOriginal } from '../services/api';
+import { useFirestore } from '../services/firestore';
 import { hrToMin, ratingColor, ratingToPercentage } from '../utils/helper';
 import './detailspage.css';
 
 function DetailsPage() {
     const router = useParams();
     const [showAlert, setShowAlert] = useState(false);
+    const {addDocument,addToWatchlist} = useFirestore();
     const {type,id}=router;
     const {user} = useAuth();
     const [loading,setloading] = useState(true);
@@ -30,7 +33,7 @@ function DetailsPage() {
         const [detailsData,creditsData,videoData] =  await Promise.all([
           fetchDetails(type,id),
           fetchCredits(type,id),
-        fetchVideos(type,id)])
+          fetchVideos(type,id)])
           setloading(true);
           setdetails(detailsData);
           setCast(creditsData?.cast?.slice(0,10));
@@ -51,16 +54,12 @@ function DetailsPage() {
     const handleWatchlistSave=async()=>{
       if(!user){
         setShowAlert(true);
-        if (alertTimeout) {
-          clearTimeout(alertTimeout);
+        if (alertTimeout) { clearTimeout(alertTimeout);}
+        const timeout = setTimeout(() => {setShowAlert(false);}, 900);
+        setAlertTimeout(timeout);
+        return;  
       }
-      const timeout = setTimeout(() => {
-          setShowAlert(false);
-      }, 600);
-      setAlertTimeout(timeout);
-        return; 
-        
-      }
+
       if(user){
         const data ={
           id : details?.id,
@@ -71,7 +70,14 @@ function DetailsPage() {
           overview : details?.overview,
           release_date : details?.release_date || details?.first_air_date,
         }
-        console.log(data);
+          
+        try {
+          await addToWatchlist(user.uid, details?.id?.toString(), data);
+      } catch (error) {
+          console.error("Error adding to watchlist: ", error);
+      }
+        
+       
       }
     }
 
@@ -87,6 +93,7 @@ function DetailsPage() {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',}} className="DetailBox" >
+           <ToastContainer />
            <Container maxWidth={'container.xl'}>
             <Stack alignItems={'center'} gap={4} direction={"row"}>
             <img className="MovieImage" height={"400px"} style={{borderRadius:"sm"}} src={`${imagePath}/${details?.poster_path}`} />
@@ -132,7 +139,7 @@ function DetailsPage() {
 </Button>
 {showAlert && (
     <Stack sx={{marginLeft:'2rem'}} spacing={2}>
-        <Alert severity="error">Please log in to save your item to watchlist!</Alert>
+        <Alert severity="error">Please login to save your item to watchlist!</Alert>
     </Stack>
 )}
               </Stack>

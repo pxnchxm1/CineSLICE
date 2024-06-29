@@ -12,6 +12,8 @@ import Movies from './pages/movies/movies.jsx';
 import Search from './pages/search/Search.jsx';
 import Shows from './pages/shows/shows.jsx';
 
+const rootElement = document.getElementById('root')
+
 const router=createBrowserRouter([{
   path:"/",
   element:<App/>,
@@ -50,8 +52,10 @@ const router=createBrowserRouter([{
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    
     <AuthProvider>
     <RouterProvider router={router}/>
     </AuthProvider>
+    
   </React.StrictMode>
 )
