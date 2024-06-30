@@ -1,4 +1,5 @@
-import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { useCallback } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { db } from "./firebase";
@@ -24,12 +25,8 @@ const addToWatchlist = async(userId,dataId,data)=>{
             console.log(e,"error");
             toast.error("Error Adding to Watchlist !", {});
         
-    }
-   
-    
+    } 
 }
-return {addDocument,addToWatchlist}}
-
 const checkInWatchlist = async(userId,dataId)=>{
     const docRef = doc(db, "users", userId?.toString(),"Watchlist",dataId?.toString());
     const docSnap = await getDoc(docRef);
@@ -39,3 +36,22 @@ const checkInWatchlist = async(userId,dataId)=>{
             return false;
         }
 }
+const removeFromWatchlist = async(userId,dataId)=>{
+    try{
+        await deleteDoc(doc(db, "users", userId?.toString(),"Watchlist",dataId?.toString()));
+        toast.success("Removed from watchlist");
+    }catch(e){
+        console.log(e,'error while deleting !');
+        toast.error("Error removing from watchlist");
+    }
+}
+
+const getWatchlist = useCallback( async(userId)=>{
+    const querySnapshot = await getDocs(collection(db, "users",userId,"Watchlist"));
+    const data = querySnapshot.docs.map((doc)=>({
+        ...doc.data()
+    }));
+    return data;
+},[]);
+return {addDocument,addToWatchlist,checkInWatchlist,removeFromWatchlist,getWatchlist}}
+

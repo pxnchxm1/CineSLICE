@@ -15,7 +15,7 @@ import './detailspage.css';
 function DetailsPage() {
     const router = useParams();
     const [showAlert, setShowAlert] = useState(false);
-    const {addDocument,addToWatchlist} = useFirestore();
+    const {addToWatchlist,checkInWatchlist,removeFromWatchlist} = useFirestore();
     const {type,id}=router;
     const {user} = useAuth();
     const [loading,setloading] = useState(true);
@@ -23,6 +23,7 @@ function DetailsPage() {
     const [cast,setCast] = useState({});
     const [video,setVideo]=useState(null);
     const [videos,setVideos]=useState({});
+    const [inWatchlist,setInWatchlist]=useState(false);
     const [alertTimeout, setAlertTimeout] = useState(null);
     const title = (details?.title || details?.name);
     const releaseDate = type==="tv"? details?.first_air_date : details?.release_date;
@@ -64,7 +65,7 @@ function DetailsPage() {
         const data ={
           id : details?.id,
           type: type,
-          tite : details?.title || details?.name,
+          title : details?.title || details?.name,
           poster_path : details?.poster_path,
           vote_average: details?.vote_average,
           overview : details?.overview,
@@ -73,6 +74,8 @@ function DetailsPage() {
           
         try {
           await addToWatchlist(user.uid, details?.id?.toString(), data);
+          const checkInWl = await checkInWatchlist(user?.uid, details?.id);
+          setInWatchlist(checkInWl);
       } catch (error) {
           console.error("Error adding to watchlist: ", error);
       }
@@ -80,6 +83,18 @@ function DetailsPage() {
        
       }
     }
+    useEffect(()=>{
+      if(!user){
+        setInWatchlist(false);
+      }
+      checkInWatchlist(user?.uid,id).then((data)=>{setInWatchlist(data);});
+    },[user,id,checkInWatchlist]);
+
+    const handleWatchlistRemove=async()=>{
+      await removeFromWatchlist(user?.uid,id);
+      const checkInWl = await checkInWatchlist(user?.uid, id);
+        setInWatchlist(checkInWl);
+   };
 
   if(loading){
     return <Stack justifyContent={'center'}   direction="row" mt={20}>
@@ -131,12 +146,13 @@ function DetailsPage() {
                   </Box>
                 </Box>
                 <Typography as="span" style={{fontSize:18 ,color:"grey",marginLeft:10,marginTop:10,fontWeight:"bold"}}>User Score </Typography>
-                <Button  variant="outlined" onClick={console.log("click")} color="success" style={{marginLeft:10,marginTop:10, display:"none"}}>
-                 In Watchlist
-                </Button>
-                <Button variant="outlined" onClick={handleWatchlistSave} color="error" style={{marginLeft:10,marginTop:10}}>
+                {inWatchlist ? (<Button  variant="outlined" onClick={handleWatchlistRemove} color="success" style={{marginLeft:10,marginTop:10}}>
+                 In Watchlist 
+                </Button>) : (<Button variant="outlined" onClick={handleWatchlistSave} color="error" style={{marginLeft:10,marginTop:10}}>
  + Add to Watchlist 
-</Button>
+</Button>)}
+                
+                
 {showAlert && (
     <Stack sx={{marginLeft:'2rem'}} spacing={2}>
         <Alert severity="error">Please login to save your item to watchlist!</Alert>

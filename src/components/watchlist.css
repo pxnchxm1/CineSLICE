@@ -1,0 +1,17 @@
+.ItemGrid{
+    background-color: rgba(37, 37, 37, 0.759);
+   
+}
+.ItemGrid:hover{
+    opacity:0.7;
+    border-radius: 10px;
+}
+
+.Title{
+    font-family: monospace;
+    font-size: 20px;
+    color:rgb(190, 190, 190);
+}
+.year{
+    color:rgba(250, 56, 56, 0.594);
+}

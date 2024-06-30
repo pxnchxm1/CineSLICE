@@ -41,7 +41,7 @@ function Navbar() {
   return (
     <Box component="section" sx={{p:3, }}>
          <Container >
-         <Stack spacing={{ xs: 1, sm: 2 }}  direction="row" justifyContent="space-between" alignItems="center"  useFlexGap flexWrap="wrap">  
+         <Stack  spacing={{ xs: 1, sm: 2 }}  direction="row" justifyContent="space-between" alignItems="center"  useFlexGap flexWrap="wrap">  
          <Link  href="/" underline="none">
          <Box className="Netflix" component="section">CineSLICE</Box>
           </Link>  
