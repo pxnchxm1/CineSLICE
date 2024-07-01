@@ -46,10 +46,10 @@ function Navbar() {
          <Box className="Netflix" component="section">CineSLICE</Box>
           </Link>  
          <Stack spacing={{ xs: 1, sm: 2 ,color:"red" }}  direction="row" justifyContent="center" alignItems="center"  useFlexGap flexWrap="wrap">
-         <Link className="LinkNames" sx={{color:"white", fontSize:18,fontWeight:"bold"}} href="/" underline="none"> Home </Link>
-         <Link className="LinkNames" sx={{color:"white", fontSize:18,fontWeight:"bold"}} href="/movies" underline="none"> Movies </Link>
-         <Link className="LinkNames" sx={{color:"white", fontSize:18,fontWeight:"bold"}} href="/shows" underline="none"> Tv Shows </Link>
-         <Link className="LinkNames"sx={{color:"white", fontSize:18,fontWeight:"bold"}}  href="/search" underline="none"> Search
+         <Link className="LinkNames" sx={{fontSize:18,fontWeight:"bold"}} href="/" underline="none"> Home </Link>
+         <Link className="LinkNames" sx={{ fontSize:18,fontWeight:"bold"}} href="/movies" underline="none"> Movies </Link>
+         <Link className="LinkNames" sx={{ fontSize:18,fontWeight:"bold"}} href="/shows" underline="none"> Tv Shows </Link>
+         <Link className="LinkNames"sx={{ fontSize:18,fontWeight:"bold"}}  href="/search" underline="none"> Search
           </Link>
         
           {user && (
