@@ -30,11 +30,11 @@ const Home = () => {
   return (
     <Box component="section" sx={{p:4, mb:2}}>
     <Container container spacing={3} direction="row" justifycontent={"center"} >
-    <Stack   direction="row"  alignItems="baseline" justifyContent="space-between" >  
+    <Stack   direction="row"  alignItems="baseline" justifyContent="space-between"  >  
       <h2 className="Trending" style={{ fontSize:"larger", fontWeight:"normal",color:"grey" }}>TRENDING</h2>
-      <Stack className="TimeWindow" direction="row" >
+      <Stack className="TimeWindow" direction="row" sx={{marginLeft:"20px"}} >
         <Box 
-        sx={{color:"grey"}}
+        sx={{color:"white"}}
         className="TodayThisWeek" 
         bgcolor={`${timeWindow=="day"?"red":"black"}`}
         as="button" 

@@ -97,9 +97,14 @@ input:hover{
     border:2px solid rgb(0, 0, 0);
 }
 @media screen and (max-width: 768px){
+    .Overview{
+        display:none;
+    }
     .TimeWindow{
         height:20px;
-        font-size:10px;
+        font-size:9px;
+        width:100px;
+        
     }
     .TodayThisWeek{
         font-size: 10px;

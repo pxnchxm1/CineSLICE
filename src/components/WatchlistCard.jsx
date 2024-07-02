@@ -8,11 +8,11 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import '../components/watchlist.css';
 import { useAuth } from '../context/useAuth';
 import { imagePath } from '../services/api';
 import { useFirestore } from '../services/firestore';
+
 
 const WatchlistCard = ({ type, item, setWatchlist }) => {
   const { removeFromWatchlist } = useFirestore();
@@ -29,15 +29,14 @@ const WatchlistCard = ({ type, item, setWatchlist }) => {
     <Link to={`/${type}/${item.id}`} style={{ textDecoration: 'none' ,padding:"2rem"}}>
       <Box className="ItemGrid"   display="flex" alignItems="center" gap={4} >
         <Box position="relative" width="150px" padding={1} >
-          <img
+          <img className='MoviePoster'
             src={`${imagePath}/${item.poster_path}`}
             alt={item.title}
-            height="200px"
-            width="150px"
             style={{ objectFit: 'cover' ,opacity:"0.5"}}
           />
             <Button 
               aria-label="Remove from watchlist"
+              className='Cross'
               style={{
                 // backgroundColor:'black',
                 position: 'absolute',
@@ -53,8 +52,8 @@ const WatchlistCard = ({ type, item, setWatchlist }) => {
       
         </Box>
 
-        <Box style={{color:"grey"}} >
-          <Typography className="Title" style={{ fontSize:'18px',fontFamily:'monospace' }}>
+        <Box style={{color:"grey" }} >
+          <Typography className="Title" style={{fontFamily:'monospace' }}>
            
             {item?.title || item?.name}
           </Typography>
@@ -67,7 +66,7 @@ const WatchlistCard = ({ type, item, setWatchlist }) => {
               {item?.vote_average?.toFixed(1)}
             </Typography>
           </Box>
-          <Typography  style={{ marginTop: '12px',textAlign:'justify',marginRight:"25px",fontSize:'15px',fontFamily:'monospace' }} >
+          <Typography  className='Overview' style={{ marginTop: '12px',textAlign:'justify',marginRight:"25px",fontSize:'15px',fontFamily:'monospace' }} >
             {item?.overview}
           </Typography>
         </Box>

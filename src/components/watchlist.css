@@ -2,6 +2,10 @@
     background-color: rgba(37, 37, 37, 0.759);
    
 }
+.MoviePoster{
+    height:200px;
+    width:150px;
+}
 .ItemGrid:hover{
     opacity:0.7;
     border-radius: 10px;
@@ -9,9 +13,41 @@
 
 .Title{
     font-family: monospace;
-    font-size: 20px;
+    fontSize:18px;
     color:rgb(190, 190, 190);
 }
 .year{
     color:rgba(250, 56, 56, 0.594);
+}
+
+
+@media screen and (max-width: 768px){
+    .Overview{
+        display:none;
+    }
+    .ItemGrid{
+        width:90%;
+    }
+    .Title{
+        font-family: monospace;
+        font-size: 10px;
+        color:rgb(190, 190, 190);
+    }
+    .year{
+        color:rgba(250, 56, 56, 0.594);
+    }
+    .MoviePoster{
+        height:110px ;
+        width:80px;
+    }
+    .Cross{
+        
+        position: absolute;
+        zIndex: 999;
+        top: 0px !important;
+        left: -50px !important;
+      
+     
+}
+
 }
