@@ -128,7 +128,28 @@ h4 {
     overflow-x: scroll;
     margin-left: 1.4rem;
     padding-top: 1rem;
-    margin-right: 1.8rem;
+    margin-right: 1rem;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
+}
+@media screen and (max-width: 768px ){
+   .MovieImage{
+    display:none !important;
+   }
+    .Descriptions{
+       display: flex;
+       flex-direction: column !important;
+    }
+    .DescriptionBox{
+        display: flex;
+        flex-direction: column !important;
+        padding-bottom:3rem;
+     }
+     Button{
+        height:30px;
+        font-size: 9px !important;
+        font-weight:bold;
+        width:130px;
+     }
+   
 }

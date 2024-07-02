@@ -1,3 +1,4 @@
+import { useMediaQuery } from '@chakra-ui/react';
 import { Box, Button, Chip, CircularProgress, Container, Typography } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
@@ -51,7 +52,7 @@ function DetailsPage() {
       }
       fetchData();
     },[type,id]);
-
+    const isMobile = useMediaQuery('(max-width:768px)');
     const handleWatchlistSave=async()=>{
       if(!user){
         setShowAlert(true);
@@ -107,10 +108,10 @@ function DetailsPage() {
           background: `linear-gradient(rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0.80)), url(${imagePathOriginal}/${details?.backdrop_path})`,
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',}} className="DetailBox" >
+          backgroundSize: 'cover',}} className='DescriptionBox' >
            <ToastContainer />
-           <Container maxWidth={'container.xl'}>
-            <Stack alignItems={'center'} gap={4} direction={"row"}>
+           <Container maxWidth={'container.xl'} >
+            <Stack alignItems={'center'} gap={4} direction={"row"} className='Descriptions'>
             <img className="MovieImage" height={"400px"} style={{borderRadius:"sm"}} src={`${imagePath}/${details?.poster_path}`} />
             <Box className="MovieNameNYear">
               <Stack alignItems={"center"}  gap={2}  direction={"row"}>
@@ -119,7 +120,7 @@ function DetailsPage() {
                 </h3>
               </Stack>
               <Stack alignItems={"center"} direction={"row"}>
-                  <img src="../src/assets/calendar.png" height={20}/>
+                  <img src="../src/assets/calendar.png" height={20} />
                   <Typography as="span" style={{fontSize:15 ,color:"grey",marginLeft:10}}>{new Date(releaseDate).toLocaleDateString('en-US')}(US)  </Typography>
                   {type==="movie" &&(
                 <>
@@ -175,7 +176,7 @@ function DetailsPage() {
       </Box>
       <Container maxWidth="container.xl"  >
   
-        <h2  style={{fontSize:20, fontFamily:'monospace',marginLeft:25,textTransform:"uppercase"}}>Cast</h2>
+        <h2  style={{fontSize:20, fontFamily:'monospace',marginLeft:25,textTransform:"uppercase",color:"grey"}}>Cast</h2>
          {cast?.length===0 && <Typography as="span" style={{fontSize:15 ,color:"grey", fontFamily:"monospace"}}>No cast </Typography>
           }
           <Stack className='others' direction={"row"}>
@@ -187,13 +188,13 @@ function DetailsPage() {
           ))}
         </Stack>
         <h2  style={{fontSize:20, fontFamily:'monospace',marginLeft:25,textTransform:"uppercase"}}>Videos</h2>
-        <VideoComponent id={video?.key} marginTop={10}/>
+        <VideoComponent className='FrameVideoBig' id={video?.key} marginTop={10}/>
         <Stack  className='vids' direction={"row"} >
         {videos && videos?.map((items)=>(
           <Box key={items?.id}  >
-           <VideoComponent id={items?.key} small />
+           <VideoComponent id={items?.key} small className="FramevideoSmall" />
            <Typography className='clamp-lines' fontSize={10} color={'grey'} textAlign={'center'} paddingLeft={3} paddingRight={3} >{items?.name}</Typography>
-
+           
           </Box>
           ))}
         </Stack>

@@ -49,7 +49,7 @@ function Navbar() {
     setAnchorEl(null);
   };
   return (
-    <Box component="section" sx={{p:3, }}>
+    <Box component="section" sx={{p:2, }}>
          <Container >
          <Stack  spacing={{ xs: 1, sm: 2 }}  direction="row" justifyContent="space-between" alignItems="center"  useFlexGap flexWrap="wrap">  
          <Link  href="/" underline="none">

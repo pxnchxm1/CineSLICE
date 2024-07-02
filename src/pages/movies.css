@@ -96,7 +96,7 @@ input:hover{
 .TimeWindow:hover{
     border:2px solid rgb(0, 0, 0);
 }
-@media screen and (max-width: 376px){
+@media screen and (max-width: 768px){
     .TimeWindow{
         height:20px;
         font-size:10px;
