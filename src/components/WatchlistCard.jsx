@@ -28,7 +28,7 @@ const WatchlistCard = ({ type, item, setWatchlist }) => {
   return (
     <Link to={`/${type}/${item.id}`} style={{ textDecoration: 'none' ,padding:"2rem"}}>
       <Box className="ItemGrid"   display="flex" alignItems="center" gap={4} >
-        <Box position="relative" width="150px" padding={1} >
+        <Box position="relative" padding={1} >
           <img className='MoviePoster'
             src={`${imagePath}/${item.poster_path}`}
             alt={item.title}

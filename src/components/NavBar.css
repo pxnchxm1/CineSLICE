@@ -33,6 +33,9 @@
     .NavComponent{
         display: none !important;
     }
+    h3{
+        font-size: 18px;
+    }
     
 }
 @media screen and (max-width: 376px){
@@ -41,5 +44,8 @@
     }
     .Trending{
         font-size: 18px;
+    }
+    h3{
+        font-size: 12px;
     }
 }
