@@ -34,8 +34,8 @@ function Search() {
   return (
     <Container sx={{ml:5}}>
       <Stack   direction="row"  alignItems="baseline" justifyContent="space-between" >  
-      <h2 style={{ fontSize:"larger", fontWeight:"normal" }}>SEARCH</h2></Stack>
-      <form onSubmit={handleSearch}>
+      <h2 style={{ fontSize:"larger", fontWeight:"normal" ,color:"grey"}}>SEARCH</h2></Stack>
+      <form onSubmit={handleSearch} className='formforsearch'>
         <input type="text"  value={searchValue} 
         placeholder='Search movies, tv shows' 
         onChange={(e)=>{setSearchValue(e.target.value)}}/>

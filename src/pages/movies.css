@@ -41,32 +41,6 @@ h2:hover{
     /* background: linear-gradient(to bottom,#3b0404,#630909);
     border-radius: 10px; */
 }
-.TodayThisWeek{
-    font-size: 15px;
-    padding: 0.7rem;
-    font-family: monospace;
-    font-weight: 500;
-    border:none;
-    background:transparent;
-
-}
-.TodayThisWeek:hover{
-    font-size: 17px;
-    
-}
-.TodayThisWeek:focus,.TodayThisWeek:enabled{
-    border:none;
-    outline: none;
-    border-radius: 0;
-}
-
-.TimeWindow{
-    border:1.5px solid rgb(69, 7, 7);
-}
-
-.TimeWindow:hover{
-    border:2px solid rgb(0, 0, 0);
-}
 .MovieTitle{
     background: rgba(0, 0, 0, 0.9);
     padding: 0.2rem;
@@ -94,4 +68,52 @@ input:hover{
     outline:none;
     opacity:0.8;
     border: 1px solid rgb(50, 49, 49);
+}
+
+.TodayThisWeek{
+    font-size: 15px;
+    padding: 0.7rem;
+    font-family: monospace;
+    font-weight: 500;
+    border:none;
+    background:transparent;
+
+}
+.TodayThisWeek:hover{
+    font-size: 17px;
+    
+}
+.TodayThisWeek:focus,.TodayThisWeek:enabled{
+    border:none;
+    outline: none;
+    border-radius: 0;
+}
+
+.TimeWindow{
+    border:1.5px solid rgb(69, 7, 7);
+}
+
+.TimeWindow:hover{
+    border:2px solid rgb(0, 0, 0);
+}
+@media screen and (max-width: 376px){
+    .TimeWindow{
+        height:20px;
+        font-size:10px;
+    }
+    .TodayThisWeek{
+        font-size: 10px;
+        padding: 0.2rem;
+        font-family: monospace;
+        font-weight: 400;
+        border:none;
+        background:transparent;
+    }
+    .formforsearch{
+        padding-right:1rem;
+        width: 210px;
+        height: 4opx;
+        font-size:12px;
+    }
+    
 }

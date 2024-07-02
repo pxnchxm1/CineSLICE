@@ -1,4 +1,6 @@
 import Logout from '@mui/icons-material/Logout';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Typography, useMediaQuery } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -36,8 +38,16 @@ function Navbar() {
     catch(e){
       console.log(e);
     }
-    
   }
+  const isMobile = useMediaQuery('(max-width:767px)');
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <Box component="section" sx={{p:3, }}>
          <Container >
@@ -45,12 +55,39 @@ function Navbar() {
          <Link  href="/" underline="none">
          <Box className="Netflix" component="section">CineSLICE</Box>
           </Link>  
-         <Stack spacing={{ xs: 1, sm: 2 ,color:"red" }}  direction="row" justifyContent="center" alignItems="center"  useFlexGap flexWrap="wrap">
-         <Link className="LinkNames" sx={{fontSize:18,fontWeight:"bold"}} href="/" underline="none"> Home </Link>
-         <Link className="LinkNames" sx={{ fontSize:18,fontWeight:"bold"}} href="/movies" underline="none"> Movies </Link>
-         <Link className="LinkNames" sx={{ fontSize:18,fontWeight:"bold"}} href="/shows" underline="none"> Tv Shows </Link>
-         <Link className="LinkNames"sx={{ fontSize:18,fontWeight:"bold"}}  href="/search" underline="none"> Search
-          </Link>
+          {isMobile ? (
+        <>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={handleMenuOpen}
+            sx={{color:"grey"}}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+          >
+            <MenuItem ><Link className="LinkNames" sx={{color:"grey",fontSize:18,fontWeight:"bold"}} href="/" underline="none"> Home </Link></MenuItem>
+            <MenuItem ><Link className="LinkNames" sx={{ color:"grey",fontSize:18,fontWeight:"bold"}} href="/movies" underline="none"> Movies </Link></MenuItem>
+            <MenuItem ><Link className="LinkNames" sx={{ color:"grey",fontSize:18,fontWeight:"bold"}} href="/shows" underline="none"> Tv Shows </Link></MenuItem>
+            <MenuItem ><Link className="LinkNames" sx={{color:"grey", fontSize:18,fontWeight:"bold"}}  href="/search" underline="none"> Search</Link></MenuItem>
+            {user && (<MenuItem><Link className="LinkNames" sx={{color:"grey", fontSize:18,fontWeight:"bold"}}  href="/watchlist" underline="none"> Watchlist</Link></MenuItem>)}
+            {user && (<Typography className="LinkNames" onClick={logout} sx={{paddingLeft:"1rem",fontWeight:"bold",color:"grey"}}>Logout</Typography>)}
+            {!user && (<Typography className="LinkNames" sx={{paddingLeft:"1rem",fontWeight:"bold",color:"grey"}} onClick={handleLogin} >Login</Typography>)}
+          </Menu>
+        </>
+      ) : (
+        <Stack className="NavComponent" spacing={{ xs: 1, sm: 2 ,color:"red" }}  direction="row" justifyContent="center" alignItems="center"  useFlexGap flexWrap="wrap">
+         <Link className="LinkNames" sx={{color:"grey",fontSize:18,fontWeight:"bold"}} href="/" underline="none"> Home </Link>
+         <Link className="LinkNames" sx={{ color:"grey",fontSize:18,fontWeight:"bold"}} href="/movies" underline="none"> Movies </Link>
+         <Link className="LinkNames" sx={{ color:"grey",fontSize:18,fontWeight:"bold"}} href="/shows" underline="none"> Tv Shows </Link>
+         <Link className="LinkNames"sx={{color:"grey", fontSize:18,fontWeight:"bold"}}  href="/search" underline="none"> Search
+         </Link>
         
           {user && (
             <React.Fragment>
@@ -115,7 +152,9 @@ function Navbar() {
           </Tooltip>
         </Box>
          )}
-         </Stack> 
+        </Stack> 
+      )}
+        
       </Stack>
       </Container>
 

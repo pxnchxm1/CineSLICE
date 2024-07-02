@@ -39,7 +39,7 @@ function Movies() {
   return (
     <Container  sx={{ml:5}}>
       <Stack direction={'row'} gap={2} justifyItems={'center'} alignItems={'center'}>
-      <h2 style={{ fontSize:"medium", fontWeight:"normal" }}>DISCOVER MOVIES</h2>
+      <h2 style={{ fontSize:"medium", fontWeight:"normal" ,color:"grey"}}>DISCOVER MOVIES</h2>
          <Select variant="filled" className='Select' sx={{color:'red',height:'40px',width:'200px',padding:"5px",marginBottom:"1rem",
         }}
           

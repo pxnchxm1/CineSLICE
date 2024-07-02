@@ -31,14 +31,15 @@ const Home = () => {
     <Box component="section" sx={{p:4, mb:2}}>
     <Container container spacing={3} direction="row" justifycontent={"center"} >
     <Stack   direction="row"  alignItems="baseline" justifyContent="space-between" >  
-      <h2 style={{ fontSize:"larger", fontWeight:"normal" }}>TRENDING</h2>
+      <h2 className="Trending" style={{ fontSize:"larger", fontWeight:"normal",color:"grey" }}>TRENDING</h2>
       <Stack className="TimeWindow" direction="row" >
         <Box 
+        sx={{color:"grey"}}
         className="TodayThisWeek" 
         bgcolor={`${timeWindow=="day"?"red":"black"}`}
         as="button" 
         onClick={()=>{setTimeWindow("day")}}>Today</Box>
-        <Box bgcolor={`${timeWindow==="week"?"red":"black"}`} className="TodayThisWeek" as="button" onClick={()=>{setTimeWindow("week")}}>This Week</Box>
+        <Box sx={{color:"grey"}} bgcolor={`${timeWindow==="week"?"red":"black"}`} className="TodayThisWeek" as="button" onClick={()=>{setTimeWindow("week")}}>This Week</Box>
       </Stack>
       </Stack>
       {/* {loading && <center><div>Loading...</div></center>} */}

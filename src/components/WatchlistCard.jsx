@@ -27,7 +27,6 @@ const WatchlistCard = ({ type, item, setWatchlist }) => {
 
   return (
     <Link to={`/${type}/${item.id}`} style={{ textDecoration: 'none' ,padding:"2rem"}}>
-      <ToastContainer/>
       <Box className="ItemGrid"   display="flex" alignItems="center" gap={4} >
         <Box position="relative" width="150px" padding={1} >
           <img
